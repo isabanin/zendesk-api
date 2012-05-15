@@ -52,6 +52,7 @@ module Zendesk
 
     def make_request(end_url, body = {})
       curl = Curl::Easy.new(main_url + end_url + ".#{@format}")
+      curl.ssl_verify_peer = false
       curl.userpwd = "#{@username}:#{@password}"
       if body.empty? or body[:list]
         curl.url = curl.url + params_list(body[:list]) if body[:list]
